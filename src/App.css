@@ -13,12 +13,23 @@
   color: white;
 }
 
-.container{
-
-}
-
-
-img{
+.AnimeCharImage{
   width: 300px;
   height: 300px;
+}
+
+.btnContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.iconsContainer{
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+h5{
+  margin: 0 auto;
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Card = ({img}) => {
+const Card = ({img, className}) => {
 
 
   return (
     <div>
-        <img src={img}></img>
+        <img className={className} src={img}></img>
     </div>
   )
 
