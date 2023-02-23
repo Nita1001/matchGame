@@ -29,7 +29,6 @@ function App() {
 
           <h3>Guess the Anime</h3>
 
-    
           <div className="iconsContainer">
             <img src={smiling}></img>
             <img src={sad}></img>
@@ -38,10 +37,9 @@ function App() {
           <Card className='AnimeCharImage' img={image}></Card>
           <h4>Title</h4>
           <div className='btnContainer'>
-            <Button></Button>
-            <Button></Button>
+            <Button title='Confused..'></Button>
+            <Button title='Correct'></Button>
           </div>
-
 
         </div>
       </header>

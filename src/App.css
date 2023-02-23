@@ -3,14 +3,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #282c34;
+  font-size: calc(10px + 2vmin);
 }
 
 .AnimeCharImage{
@@ -20,16 +20,29 @@
 
 .btnContainer{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .iconsContainer{
   height: 40px;
   display: flex;
-  justify-content: space-around;
   margin-bottom: 1rem;
+  justify-content: space-around;
 }
 
 h5{
   margin: 0 auto;
+}
+
+.btnContainer button{
+  border: none;
+  width: 7.4rem;
+  height: 1.8rem;
+  color: rgba(255, 255, 255, 0.742);
+  font-size: medium;
+  border-radius: 0.4rem;
+  background-color: #282c84;
+}
+.btnContainer button:hover{
+  color: rgba(255, 255, 255);
 }
