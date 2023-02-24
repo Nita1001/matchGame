@@ -17,23 +17,38 @@ import './App.css';
 function App() {
 
   const [image, setImage] = useState(null);
-  const images = [edward, l, killua, zoro, saturo ];
+  const images = [edward, l, killua, zoro, saturo];
   const [item, setItem] = useState(null);
+  const [prevIndex, setPrevIndex] = useState(-1);
+
+  const [startGame, setStartGame] = useState(false);
+
+  const randomUnique = () => {
+    const length = images.length;
+    let random = Math.floor(Math.random() * length);
+    while (random === prevIndex) {
+      random = Math.floor(Math.random() * length);
+    }
+    setPrevIndex(random);
+    return random;
+  }
 
   const handleCorrect = () => {
-    const length = images.length;
-    const random = Math.floor(Math.random() * length);
+    const random = randomUnique();
     setItem(images[random]);
-    setImage(item);
-    console.log('correct', random);
+    setImage(images[random]);
+    console.log('random', random);
   }
-  const handleConfused = () => {
-    const length = images.length;
-    const random = Math.floor(Math.random() * length);
-    setItem(images[random]);
-    setImage(item);
-    console.log('confused', random);
 
+  const handleConfused = () => {
+    const random = randomUnique();
+    setItem(images[random]);
+    setImage(images[random]);
+    console.log('random', random);
+  }
+
+  const handleStartGame = () => {
+    setStartGame(true);
   }
 
   return (
@@ -42,7 +57,7 @@ function App() {
         <div className='container'>
 
           <h3>Guess the Anime</h3>
-          <div className="iconsContainer">
+          {startGame ? <><div className="iconsContainer">
             <img src={smiling} alt=''></img>
             <img src={sad} alt=''></img>
           </div>
@@ -51,8 +66,8 @@ function App() {
           <div className='btnContainer'>
             <Button handleClick={handleConfused} title='Confused..'></Button>
             <Button handleClick={handleCorrect} title='Correct'></Button>
-          </div>
-
+          </div></>      
+: <Button title='Start Game' handleClick={handleStartGame}></Button>}
         </div>
       </header>
     </div>
