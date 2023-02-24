@@ -36,14 +36,14 @@ function App() {
   const handleCorrect = () => {
     const random = randomUnique();
     setItem(images[random]);
-    setImage(images[random]);
+    setImage(item);
     console.log('random', random);
   }
 
   const handleConfused = () => {
     const random = randomUnique();
     setItem(images[random]);
-    setImage(images[random]);
+    setImage(item);
     console.log('random', random);
   }
 
@@ -61,13 +61,13 @@ function App() {
             <img src={smiling} alt=''></img>
             <img src={sad} alt=''></img>
           </div>
-          <Card className='AnimeCharImage' img={image}></Card>
-          <h4>Title</h4>
-          <div className='btnContainer'>
-            <Button handleClick={handleConfused} title='Confused..'></Button>
-            <Button handleClick={handleCorrect} title='Correct'></Button>
-          </div></>      
-: <Button title='Start Game' handleClick={handleStartGame}></Button>}
+            <Card className='AnimeCharImage' img={image}></Card>
+            <h4>Title</h4>
+            <div className='btnContainer'>
+              <Button handleClick={handleConfused} title='Confused..'></Button>
+              <Button handleClick={handleCorrect} title='Correct'></Button>
+            </div></>
+            : <div className="btnContainer"><Button title='Start Game' handleClick={handleStartGame}></Button></div>}
         </div>
       </header>
     </div>
