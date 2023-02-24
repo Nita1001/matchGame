@@ -5,7 +5,7 @@ const Card = ({img, className}) => {
 
   return (
     <div>
-        <img className={className} src={img}></img>
+        <img className={className} src={img}  alt=''></img>
     </div>
   )
 
