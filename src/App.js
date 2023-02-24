@@ -18,7 +18,6 @@ function App() {
 
   const [image, setImage] = useState(null);
   const images = [edward, l, killua, zoro, saturo];
-  const [item, setItem] = useState(null);
   const [prevIndex, setPrevIndex] = useState(-1);
 
   const [startGame, setStartGame] = useState(false);
