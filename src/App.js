@@ -33,21 +33,21 @@ function App() {
     return random;
   }
 
-  const handleCorrect = () => {
+  const changeImg = () => {
     const random = randomUnique();
-    setItem(images[random]);
-    setImage(item);
+    setImage(images[random]);
     console.log('random', random);
+  }
+  const handleCorrect = () => {
+    changeImg();
   }
 
   const handleConfused = () => {
-    const random = randomUnique();
-    setItem(images[random]);
-    setImage(item);
-    console.log('random', random);
+    changeImg();
   }
 
   const handleStartGame = () => {
+    changeImg();
     setStartGame(true);
   }
 
