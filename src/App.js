@@ -15,15 +15,21 @@ import sad from './Images/icons8-sad-60.png'
 import './App.css';
 
 function App() {
-
+  const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
-  const images = [edward, l, killua, zoro, saturo];
+  const anime = [
+    {img: edward, from: 'Fullmetal Alchemist'},
+    {img: l, from: 'Death Note'},
+    {img: killua, from: 'Hunter X Hunter'},
+    {img: zoro, from: 'One Piece'},
+    {img: saturo, from: 'jujutsu kaisen'}];
+  
   const [prevIndex, setPrevIndex] = useState(-1);
 
   const [startGame, setStartGame] = useState(false);
 
   const randomUnique = () => {
-    const length = images.length;
+    const length = anime.length;
     let random = Math.floor(Math.random() * length);
     while (random === prevIndex) {
       random = Math.floor(Math.random() * length);
@@ -34,7 +40,8 @@ function App() {
 
   const changeImg = () => {
     const random = randomUnique();
-    setImage(images[random]);
+    setImage(anime[random].img);
+    generateTitle();
     console.log('random', random);
   }
   const handleCorrect = () => {
@@ -50,6 +57,12 @@ function App() {
     setStartGame(true);
   }
 
+  const generateTitle = () => {
+    const random = randomUnique();
+    setTitle(anime[random].from);
+    console.log('random', random);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -61,7 +74,7 @@ function App() {
             <img src={sad} alt=''></img>
           </div>
             <Card className='AnimeCharImage' img={image}></Card>
-            <h4>Title</h4>
+            <h4>{title}</h4>
             <div className='btnContainer'>
               <Button handleClick={handleConfused} title='Confused..'></Button>
               <Button handleClick={handleCorrect} title='Correct'></Button>
