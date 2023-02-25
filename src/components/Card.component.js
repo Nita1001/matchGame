@@ -1,15 +1,9 @@
-import React from 'react'
-
 const Card = ({img, className}) => {
-
-
   return (
     <div>
-        <img className={className} src={img}  alt=''></img>
+      <img className={className} src={img} alt='' />
     </div>
   )
-
-
 }
 
 export default Card
