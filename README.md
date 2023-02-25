@@ -26,5 +26,5 @@ CSS
 # Credits
 This game was created by Me using the following resources:
 
-Anime character images: [google.com]
+Anime character images: [https://google.com]
 Smiley face icons: [https://icons8.com/icon/120044/anime-emoji]
