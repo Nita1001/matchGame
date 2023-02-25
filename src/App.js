@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import Card from './components/Card.component'
-import Button from './components/Button.component'
+import { useState, useEffect, useCallback, useMemo } from "react";
+import Card from './components/Card.component';
+import Button from './components/Button.component';
 
-import edward from './Images/edwardElric.PNG'
-import l from './Images/L.PNG'
-import zoro from './Images/RoronoaZoro.jpg'
-import killua from './Images/killuaXoldyck.PNG'
-import saturo from './Images/saturoGojo.PNG'
-
+import edward from './Images/edwardElric.PNG';
+import l from './Images/L.PNG';
+import zoro from './Images/RoronoaZoro.jpg';
+import killua from './Images/killuaXoldyck.PNG';
+import saturo from './Images/saturoGojo.PNG';
 
 import smiling from './Images/icons8-smiling-48.png';
 import sad from './Images/icons8-sad-60.png';
@@ -15,21 +14,24 @@ import sad from './Images/icons8-sad-60.png';
 import './App.css';
 
 function App() {
+
   const [title, setTitle] = useState('');
-  const [image, setImage] = useState(null);
-  const anime = [
-    { img: edward, from: 'Fullmetal Alchemist' },
-    { img: l, from: 'Death Note' },
-    { img: killua, from: 'Hunter X Hunter' },
-    { img: zoro, from: 'One Piece' },
-    { img: saturo, from: 'jujutsu kaisen' }];
-
+  const [currentTitle, setCurrentTitle] = useState('');
+  const [image, setCurrentImage] = useState(null);
   const [prevIndex, setPrevIndex] = useState(-1);
-
   const [startGame, setStartGame] = useState(false);
-  const [answer, setAnswer] = useState(null);
+  const [showSmiley, setShowSmiley] = useState(false);
+  const [showSad, setShowSad] = useState(false);
 
-  const randomUnique = () => {
+  const anime = useMemo(() =>
+    [
+      { img: edward, from: 'Fullmetal Alchemist' },
+      { img: l, from: 'Death Note' },
+      { img: killua, from: 'Hunter X Hunter' },
+      { img: zoro, from: 'One Piece' },
+      { img: saturo, from: 'jujutsu kaisen' }], []);
+
+  const randomUnique = useCallback(() => {
     const length = anime.length;
     let random = Math.floor(Math.random() * length);
     while (random === prevIndex) {
@@ -37,36 +39,66 @@ function App() {
     }
     setPrevIndex(random);
     return random;
-  }
+  }, [anime, prevIndex]);
 
-  const changeImg = (prevAnswer) => {
-    const random = randomUnique();
-    const animeData = anime[random];
-    setImage(animeData.img);
-    setTitle(animeData.from);
-    setAnswer(prevAnswer);
-  }
-
-  const handleCorrect = () => {
-    setAnswer(true);
-    changeImg(true);
-  }
-
-  const handleConfused = () => {
-    setAnswer(false);
-    changeImg(false);
-  }
-
-  const handleStartGame = () => {
-    changeImg();
-    setStartGame(true);
-  }
+  const checkAnswer = useCallback((choice) => {
+    if (currentTitle === title) {
+      if (choice === "correct") {
+        console.log('GOOOOOD')
+        setShowSmiley(true);
+        setShowSad(false);
+      } else if (choice === "confused") {
+        console.log('NOT')
+        setShowSmiley(false);
+        setShowSad(true);
+      }
+    } else {
+      if (choice === "confused") {
+        console.log('GOOOOOD')
+        setShowSmiley(true);
+        setShowSad(false);
+      } else if (choice === "correct") {
+        console.log('NOT')
+        setShowSmiley(false);
+        setShowSad(true);
+      }
+    }
+  }, [currentTitle, title]);
 
   useEffect(() => {
-    if (title === '') return;
-    console.log('from', title);
-    console.log('answer', answer);
-  }, [title, answer]);
+    if (showSmiley) {
+      setTimeout(() => {
+        setShowSmiley(false);
+      }, 2000);
+    }
+  }, [showSmiley]);
+
+  const changeImg = useCallback(() => {
+    const random = randomUnique();
+    const randomTile = randomUnique();
+    const animeData = anime[random];
+    setCurrentImage(animeData.img);
+    setCurrentTitle(animeData.from);
+    setTitle(anime[randomTile].from);
+    const result = animeData;
+    return result;
+  }, [anime, randomUnique]);
+
+  const handleCorrect = useCallback(() => {
+    checkAnswer('correct');
+    changeImg();
+  }, [changeImg, checkAnswer]);
+
+  const handleConfused = useCallback(() => {
+    checkAnswer('confused');
+    changeImg();
+  }, [changeImg, checkAnswer]);
+
+  const handleStartGame = useCallback(() => {
+    changeImg();
+    setStartGame(true);
+  }, [changeImg]);
+
 
   return (
     <div className="App">
@@ -74,17 +106,20 @@ function App() {
         <div className='container'>
 
           <h3>Guess the Anime</h3>
+
           {startGame ? <><div className="iconsContainer">
-            {answer === true && <img src={smiling} alt=''></img>}
-            {answer === false && <img src={sad} alt=''></img>}
+
+            {showSmiley && <img src={smiling} alt='' />}
+            {showSad && <img src={sad} alt='' />}
           </div>
             <Card className='AnimeCharImage' img={image}></Card>
             <h4>{title}</h4>
             <div className='btnContainer'>
-              <Button handleClick={handleConfused} title='Confused..'></Button>
-              <Button handleClick={handleCorrect} title='Correct'></Button>
+              <Button handleClick={() => handleConfused()} title='Confused..'></Button>
+              <Button handleClick={() => handleCorrect()} title='Correct'></Button>
             </div></>
-            : <div className="btnContainer"><Button title='Start Game' handleClick={handleStartGame}></Button></div>}
+            : <div className="btnContainer"><Button title='Start Game' handleClick={() => handleStartGame()}></Button></div>}
+
         </div>
       </header>
     </div>
@@ -92,3 +127,4 @@ function App() {
 }
 
 export default App;
+
