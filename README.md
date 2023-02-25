@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+# Guess The Anime Game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Guess The Anime Game!
+This simple game was developed as part of my Full Stack Bootcamp exercise assignments.
+It challenges players to identify the anime that a given character comes from, putting their knowledge of the genre to the test.
+Whether you're a seasoned anime fan or just starting out, this game offers a fun and engaging way to put your skills to the test!
 
-## Available Scripts
+The objective of the game is to correctly guess which anime a character is from based on their image.
+The game ends when you have correctly guessed 10 anime characters.
 
-In the project directory, you can run:
+# How to Play
+Once you start the game, an anime character image and the name of a different anime character will be displayed on the screen. You must guess whether the character's name displayed on the screen matches the name of the character in the image by clicking the "Correct" button or the "Confused" button.
 
-### `npm start`
+If you guess correctly, a smiley face will appear, and your score will increase by one.
+If you guess incorrectly, a sad face will appear, and your score will not change.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The game ends when you have correctly guessed 10 anime characters
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Technologies Used
+Guess The Anime Game was built using the following technologies:
 
-### `npm test`
+React
+JavaScript
+HTML
+CSS
+# Credits
+This game was created by Me using the following resources:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Anime character images: [google.com]
+Smiley face icons: [https://icons8.com/icon/120044/anime-emoji]
