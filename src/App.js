@@ -22,7 +22,7 @@ function App() {
   const [startGame, setStartGame] = useState(false);
   const [showSmiley, setShowSmiley] = useState(false);
   const [showSad, setShowSad] = useState(false);
-
+  const [score, setScore] = useState(0);
   const anime = useMemo(() =>
     [
       { img: edward, from: 'Fullmetal Alchemist' },
@@ -47,6 +47,7 @@ function App() {
         console.log('GOOOOOD')
         setShowSmiley(true);
         setShowSad(false);
+        setScore(prevState => prevState + 1);
       } else if (choice === "confused") {
         console.log('NOT')
         setShowSmiley(false);
@@ -57,6 +58,7 @@ function App() {
         console.log('GOOOOOD')
         setShowSmiley(true);
         setShowSad(false);
+        setScore(prevState => prevState + 1)
       } else if (choice === "correct") {
         console.log('NOT')
         setShowSmiley(false);
@@ -74,15 +76,22 @@ function App() {
   }, [showSmiley]);
 
   const changeImg = useCallback(() => {
-    const random = randomUnique();
-    const randomTile = randomUnique();
-    const animeData = anime[random];
-    setCurrentImage(animeData.img);
-    setCurrentTitle(animeData.from);
-    setTitle(anime[randomTile].from);
-    const result = animeData;
-    return result;
-  }, [anime, randomUnique]);
+
+    if (score < 10) {
+      const random = randomUnique();
+      const randomTile = randomUnique();
+      const animeData = anime[random];
+      setCurrentImage(animeData.img);
+      setCurrentTitle(animeData.from);
+      setTitle(anime[randomTile].from);
+      const result = animeData;
+      return result;
+    } else {
+      console.log('Game Over!');
+      setScore(0);
+    }
+
+  }, [anime, randomUnique, score]);
 
   const handleCorrect = useCallback(() => {
     checkAnswer('correct');
@@ -99,15 +108,14 @@ function App() {
     setStartGame(true);
   }, [changeImg]);
 
-
   return (
     <div className="App">
       <header className="App-header">
         <div className='container'>
 
           <h3>Guess the Anime</h3>
-
-          {startGame ? <><div className="iconsContainer">
+          <h4>Score: {score}</h4>
+          {startGame && score < 10 ? <><div className="iconsContainer">
 
             {showSmiley && <img src={smiling} alt='' />}
             {showSad && <img src={sad} alt='' />}
