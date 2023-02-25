@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from './components/Card.component'
 import Button from './components/Button.component'
 
@@ -9,8 +9,8 @@ import killua from './Images/killuaXoldyck.PNG'
 import saturo from './Images/saturoGojo.PNG'
 
 
-import smiling from './Images/icons8-smiling-48.png'
-import sad from './Images/icons8-sad-60.png'
+import smiling from './Images/icons8-smiling-48.png';
+import sad from './Images/icons8-sad-60.png';
 
 import './App.css';
 
@@ -18,15 +18,16 @@ function App() {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null);
   const anime = [
-    {img: edward, from: 'Fullmetal Alchemist'},
-    {img: l, from: 'Death Note'},
-    {img: killua, from: 'Hunter X Hunter'},
-    {img: zoro, from: 'One Piece'},
-    {img: saturo, from: 'jujutsu kaisen'}];
-  
+    { img: edward, from: 'Fullmetal Alchemist' },
+    { img: l, from: 'Death Note' },
+    { img: killua, from: 'Hunter X Hunter' },
+    { img: zoro, from: 'One Piece' },
+    { img: saturo, from: 'jujutsu kaisen' }];
+
   const [prevIndex, setPrevIndex] = useState(-1);
 
   const [startGame, setStartGame] = useState(false);
+  const [answer, setAnswer] = useState(null);
 
   const randomUnique = () => {
     const length = anime.length;
@@ -38,18 +39,22 @@ function App() {
     return random;
   }
 
-  const changeImg = () => {
+  const changeImg = (prevAnswer) => {
     const random = randomUnique();
-    setImage(anime[random].img);
-    generateTitle();
-    console.log('random', random);
+    const animeData = anime[random];
+    setImage(animeData.img);
+    setTitle(animeData.from);
+    setAnswer(prevAnswer);
   }
+
   const handleCorrect = () => {
-    changeImg();
+    setAnswer(true);
+    changeImg(true);
   }
 
   const handleConfused = () => {
-    changeImg();
+    setAnswer(false);
+    changeImg(false);
   }
 
   const handleStartGame = () => {
@@ -57,11 +62,11 @@ function App() {
     setStartGame(true);
   }
 
-  const generateTitle = () => {
-    const random = randomUnique();
-    setTitle(anime[random].from);
-    console.log('random', random);
-  }
+  useEffect(() => {
+    if (title === '') return;
+    console.log('from', title);
+    console.log('answer', answer);
+  }, [title, answer]);
 
   return (
     <div className="App">
@@ -70,8 +75,8 @@ function App() {
 
           <h3>Guess the Anime</h3>
           {startGame ? <><div className="iconsContainer">
-            <img src={smiling} alt=''></img>
-            <img src={sad} alt=''></img>
+            {answer === true && <img src={smiling} alt=''></img>}
+            {answer === false && <img src={sad} alt=''></img>}
           </div>
             <Card className='AnimeCharImage' img={image}></Card>
             <h4>{title}</h4>
